@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import PetItem from "./PetItem";
+import PetsStore from "../petStore";
+import { observe } from "mobx";
 
 function PetsList({ petsData }) {
   const [query, setQuery] = useState("");
@@ -9,13 +11,14 @@ function PetsList({ petsData }) {
   const handleAdopt = (petId) =>
     setPets(pets.filter((pet) => pet.id !== petId));
 
-  const petList = pets
-    .filter(
-      (pet) =>
-        pet.name.toLowerCase().includes(query.toLowerCase()) &&
-        pet.type.includes(type)
-    )
-    .map((pet) => <PetItem key={pet.id} pet={pet} handleAdopt={handleAdopt} />);
+  const petList = pets.filter(
+    (pet) =>
+      pet.name.toLowerCase().includes(query.toLowerCase()) &&
+      pet.type.includes(type)
+  );
+  store.pet.map((pet) => (
+    <PetItem key={pet.id} pet={pet} handleAdopt={handleAdopt} />
+  ));
   return (
     <section id="doctors" class="doctor-section pt-140">
       <div class="container">
@@ -58,4 +61,4 @@ function PetsList({ petsData }) {
     </section>
   );
 }
-export default PetsList;
+export default observer(PetsList);

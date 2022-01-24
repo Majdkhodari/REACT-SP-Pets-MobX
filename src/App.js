@@ -1,11 +1,11 @@
 import "./App.css";
 import PetsList from "./Components/PetsList";
-import petsData from "./petsData";
+import PetsStore from "./petStore";
 
 function App() {
   return (
     <div className="App">
-      <PetsList petsData={petsData} />
+      <PetsList PetsStore={pets} />
     </div>
   );
 }
